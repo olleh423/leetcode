@@ -35,7 +35,7 @@ public class GraphClone {
 	public static GraphNode clone(GraphNode node) {
 		if(node == null) return null;
 		GraphNode curr = new GraphNode(node.data);
-		Map<Integer, GraphClone.GraphNode> map = new HashMap<>();
+		Map<Integer, GraphNode> map = new HashMap<>();
 		map.put(curr.data, curr);
 		return clone(node, curr, map);
 	}
