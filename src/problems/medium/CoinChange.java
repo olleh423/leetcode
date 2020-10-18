@@ -19,21 +19,22 @@ public class CoinChange {
     //find fewest number of coins to create amount
     public int coinChange(int[] coins, int amount) {
 
-        if(coins == null)
-            return 0;
+        if(coins == null) return 0;
 
         int[] DP = new int[amount + 1];
-        Arrays.fill(DP, amount + 1);
-        DP[0] = 0;
+        Arrays.fill(DP, DP.length);
 
-        for(int i=0 ; i <= amount ; i++) {
-            for(int j=0 ; j < coins.length ; j++) {
-                if(coins[j] <= i) {
-                    DP[i] = Math.min(DP[i], 1 + DP[i - coins[j]]);
-                }
+        DP[0] = 0;
+        for(int i=1 ; i < DP.length ; i++) {
+
+            int min = DP[i];
+            for(int j=0 ; j<coins.length ; j++) {
+                int value = i - coins[j] >= 0 ? DP[i - coins[j]] : DP.length;
+                min = Math.min(min, 1 + value);
             }
+            DP[i] = min;
         }
 
-        return DP[amount] > amount ? -1 : DP[amount];
+        return DP[amount] == DP.length ? -1 : DP[amount];
     }
 }
