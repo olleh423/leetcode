@@ -5,6 +5,10 @@ import java.util.*;
 /*
  * Author : Vijay Sharma 26-10-2020
  */
+
+/*
+Add binary numbers
+ */
 public class AddBinary {
 
     public static void main(String[] args) {
