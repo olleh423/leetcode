@@ -12,6 +12,33 @@ public class JumpGame2 {
         System.out.println(obj.jump(nums));
     }
 
+    public int jumpOpt(int[] arr) {
+
+        if(arr == null || arr.length == 1) return 0;
+        if(arr[0] == 0) return -1;
+
+        int dest = arr[0];
+        int steps = arr[0];
+        int jumps = 1;
+
+        for(int i=1 ; i<arr.length-1 ; i++) {
+
+            dest = Math.max(dest, i + arr[i]);
+            steps--;
+
+            if(steps == 0) {
+
+                jumps++;
+                if(i >= dest)
+                    return -1;
+
+                steps = dest - i;
+            }
+        }
+
+        return jumps;
+    }
+
     public int jump(int[] nums) {
 
         if(nums == null || nums.length == 1)

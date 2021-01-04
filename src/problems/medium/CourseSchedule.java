@@ -23,7 +23,7 @@ public class CourseSchedule {
         Map<Integer, List<Integer>> map = new HashMap<>();
         for(int[] dep : deps) {
             if(!map.containsKey(dep[0]))
-                map.put(dep[0], new ArrayList<Integer>());
+                map.put(dep[0], new ArrayList<>());
             map.get(dep[0]).add(dep[1]);
         }
 
