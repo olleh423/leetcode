@@ -1,6 +1,7 @@
 package problems.medium;
 
 import java.util.*;
+import java.util.stream.IntStream;
 
 /*
  * Author : Vijay Sharma 19-10-2020
