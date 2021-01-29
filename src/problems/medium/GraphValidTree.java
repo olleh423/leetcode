@@ -36,7 +36,6 @@ public class GraphValidTree {
             // union
             nums[x] = y;
         }
-
         return edges.length == n - 1;
     }
 
