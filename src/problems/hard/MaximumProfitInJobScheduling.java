@@ -38,7 +38,7 @@ public class MaximumProfitInJobScheduling {
             jobs[i] = new Job(startTime[i], endTime[i], profit[i]);
         }
 
-        Arrays.sort(jobs, (a, b) -> a.end - b.end);
+        Arrays.sort(jobs, Comparator.comparingInt(a -> a.end));
 
         int max = jobs[0].profit;
         int[] result = new int[n];
@@ -46,15 +46,29 @@ public class MaximumProfitInJobScheduling {
 
         for(int i=1; i < n; i++){
             result[i] = Math.max(jobs[i].profit, result[i-1]);
-            for(int j=i-1 ; j >=0 ; j--){
-                if(jobs[j].end <= jobs[i].start){
-                    result[i] = Math.max(result[i], jobs[i].profit + result[j]);
-                    break;
-                }
+            int index = getFirstSmallerTimeIndex(0, i-1, jobs[i].start, jobs);
+            if(index != -1) {
+                result[i] = Math.max(result[i], result[index] + jobs[i].profit);
             }
             max = Math.max(max, result[i]);
         }
 
         return max;
+    }
+
+    private int getFirstSmallerTimeIndex(int low, int high, int startTime, Job[] jobs) {
+        int index = -1;
+        while(low <= high) {
+            int mid = (low + high) / 2;
+            if(jobs[mid].end <= startTime) {
+                index = mid;
+                low = mid + 1;
+            }
+            if(jobs[mid].end > startTime)
+                high = mid - 1;
+            else
+                low = mid + 1;
+        }
+        return index;
     }
 }
