@@ -1,4 +1,4 @@
-package problems.easy;
+package problems.medium;
 
 /*
  * Author : Vijay Sharma 25-10-2020
