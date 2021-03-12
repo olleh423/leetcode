@@ -17,63 +17,55 @@ public class AllNodesDistanceKBinaryTree {
         TreeNode left, right;
     }
 
-    public List<Integer> distanceK(TreeNode root, TreeNode target, int k) {
+    public List<Integer> distanceK(TreeNode root, TreeNode target, int K) {
 
         List<Integer> result = new ArrayList<>();
-
-        if(root == null || target == null)
-            return result;
-
-        atDistanceK(root, target, k, result);
+        solve(root, target, K, result);
         return result;
     }
 
-    private int atDistanceK(TreeNode root, TreeNode target, int k, List<Integer> result) {
+    public int solve(TreeNode root, TreeNode target, int K, List<Integer> result) {
 
-        if(root == null)
-            return -1;
-
+        if(root == null) return -1;
         if(root == target) {
-            atDistanceKDown(root, k, result);
-            return 0;
+            kNodesDown(root, K, result);
+            return 1;
         }
 
-        int l = atDistanceK(root.left, target, k, result);
-        if(l != -1) {
-            if(l+1 == k) {
+        int left = solve(root.left, target, K, result);
+        if(left != -1) {
+            if(left == K) {
                 result.add(root.val);
-            } else {
-                atDistanceKDown(root.right, k-l-2, result);
+                return left + 1;
+            } else if(left > K) {
+                return left;
             }
-            return l+1;
-        }
-        else {
-            int r = atDistanceK(root.right, target, k, result);
-            if(r != -1) {
-                if(r+1 == k) {
-                    result.add(root.val);
-                }
-                else {
-                    atDistanceKDown(root.left, k-r-2, result);
-                }
-                return r+1;
-            }
+            kNodesDown(root.right, K-left-1, result);
+            return left + 1;
         }
 
+        int right = solve(root.right, target, K, result);
+        if(right != -1) {
+            if(right == K) {
+                result.add(root.val);
+                return right + 1;
+            } else if(right > K) {
+                return right;
+            }
+            kNodesDown(root.left, K-right-1, result);
+            return right + 1;
+        }
         return -1;
     }
 
-    private void atDistanceKDown(TreeNode root, int k, List<Integer> result) {
+    private void kNodesDown(TreeNode root, int K, List<Integer> result) {
 
-        if(root == null)
-            return;
-
-        if(k == 0) {
+        if(root == null) return;
+        if(K == 0) {
             result.add(root.val);
             return;
         }
-
-        atDistanceKDown(root.left, k-1, result);
-        atDistanceKDown(root.right, k-1, result);
+        kNodesDown(root.left, K-1, result);
+        kNodesDown(root.right, K-1, result);
     }
 }

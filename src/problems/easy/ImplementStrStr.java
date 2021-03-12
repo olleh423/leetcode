@@ -15,6 +15,31 @@ public class ImplementStrStr {
         System.out.println(obj.strStr(haystack, needle));
     }
 
+    public int strStr_2(String haystack, String needle) {
+
+        if(haystack == null || needle == null || needle.length() > haystack.length()) return -1;
+        if(needle.isEmpty()) return 0;
+
+        for(int i=0 ; i<haystack.length()-needle.length()+1 ; i++) {
+
+            if(haystack.charAt(i) == needle.charAt(0)) {
+
+                boolean matched = true;
+                for(int j=0, k=i ; j<needle.length() ; j++, k++) {
+
+                    if(haystack.charAt(k) != needle.charAt(j)) {
+                        matched = false;
+                        break;
+                    }
+                }
+
+                if(matched) return i;
+            }
+        }
+
+        return -1;
+    }
+
     public int strStr(String haystack, String needle) {
 
         if(haystack == null)
@@ -76,4 +101,5 @@ public class ImplementStrStr {
 
         return -1;
     }
+
 }
