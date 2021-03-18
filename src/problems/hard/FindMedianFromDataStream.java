@@ -24,8 +24,8 @@ public class FindMedianFromDataStream {
 
         public MedianFinder() {
 
-            maxHeap = new PriorityQueue<Integer>((a, b) -> a - b);
-            minHeap = new PriorityQueue<Integer>((a, b) -> b - a);
+            maxHeap = new PriorityQueue<>();
+            minHeap = new PriorityQueue<>((a, b) -> b - a);
         }
 
         private void rebalance() {

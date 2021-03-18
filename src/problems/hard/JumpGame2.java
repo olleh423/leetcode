@@ -17,22 +17,16 @@ public class JumpGame2 {
         if(arr == null || arr.length == 1) return 0;
         if(arr[0] == 0) return -1;
 
-        int dest = arr[0];
-        int steps = arr[0];
-        int jumps = 1;
+        int jumps = 0;
+        int currentReach = 0;
+        int currentMax = 0;
 
-        for(int i=1 ; i<arr.length-1 ; i++) {
+        for(int i=0 ; i<arr.length-1 ; i++) {
 
-            dest = Math.max(dest, i + arr[i]);
-            steps--;
-
-            if(steps == 0) {
-
+            currentMax = Math.max(currentMax, i + arr[i]);
+            if(i == currentReach) {
                 jumps++;
-                if(i >= dest)
-                    return -1;
-
-                steps = dest - i;
+                currentReach = currentMax;
             }
         }
 

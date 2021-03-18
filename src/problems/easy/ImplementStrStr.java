@@ -51,30 +51,6 @@ public class ImplementStrStr {
         return kmp(haystack, needle);
     }
 
-    private static int[] getPITable(String pattern) {
-
-        int[] PI = new int[pattern.length()];
-        PI[0] = 0;
-
-        int i=1, j=0;
-        while(i < pattern.length()) {
-
-            if(pattern.charAt(i) == pattern.charAt(j)) {
-                PI[i] = ++j;
-                i++;
-            } else {
-                if(j != 0) {
-                    j = PI[j-1];
-                } else {
-                    PI[i] = 0;
-                    i++;
-                }
-            }
-        }
-
-        return PI;
-    }
-
     public static int kmp(String text, String pattern) {
 
         int[] PI = getPITable(pattern);
@@ -102,4 +78,27 @@ public class ImplementStrStr {
         return -1;
     }
 
+    private static int[] getPITable(String pattern) {
+
+        int[] PI = new int[pattern.length()];
+        PI[0] = 0;
+
+        int i=1, j=0;
+        while(i < pattern.length()) {
+
+            if(pattern.charAt(i) == pattern.charAt(j)) {
+                PI[i] = ++j;
+                i++;
+            } else {
+                if(j != 0) {
+                    j = PI[j-1];
+                } else {
+                    PI[i] = 0;
+                    i++;
+                }
+            }
+        }
+
+        return PI;
+    }
 }
